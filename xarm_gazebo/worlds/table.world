@@ -2,7 +2,6 @@
 <sdf version="1.4">
   <world name="default">
 
-    <!-- ✅ Add this plugin block here -->
     <plugin name="attach_detach_plugin" filename="libattach_detach.so"/>
 
     <include>
