@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>attach_detach</name>
+  <version>0.0.1</version>
+  <description>
+    A package that contains Gazebo plugins for attaching and detaching links.
+  </description>
+
+  <maintainer email="syedazif321@gmail.com">azif</maintainer>
+
+  <license>Apache 2.0</license>
+
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <depend>msg_gazebo</depend>
+
+  <export>
+    <gazebo_plugin/>
+  </export>
+</package>

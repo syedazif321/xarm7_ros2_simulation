@@ -1,0 +1,11 @@
+
+string model1
+string link1
+string model2
+string link2
+bool attach  # True for attach, False for detach
+
+---
+# Response
+bool success
+string message
