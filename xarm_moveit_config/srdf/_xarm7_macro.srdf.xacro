@@ -59,6 +59,17 @@
       <joint name="${prefix}joint7" value="0" />
     </group_state>
 
+      <group_state name="look" group="${prefix}xarm7">
+      <joint name="${prefix}joint1" value="-9.634109314315964e-05" />
+      <joint name="${prefix}joint2" value="-0.071963249884918312" />
+      <joint name="${prefix}joint3" value="-0.00017165762239823579" />
+      <joint name="${prefix}joint4" value="1.6127273478062465" />
+      <joint name="${prefix}joint5" value="-6.3550559483260827e-05" />
+      <joint name="${prefix}joint6" value="1.6576269636020662" />
+      <joint name="${prefix}joint7" value="-0.00015535496839191865" />
+    </group_state>
+
+
     <!-- gripper -->
     <xacro:if value="${add_gripper}">
       <group name="${prefix}xarm_gripper">
