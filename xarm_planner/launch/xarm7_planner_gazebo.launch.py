@@ -22,6 +22,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(PathJoinSubstitution([FindPackageShare('xarm_moveit_config'), 'launch', '_robot_moveit_gazebo.launch.py'])),
         launch_arguments={
             'dof': '7',
+            'add_realsense_d435i': 'true',
+            'add_vacuum_gripper': 'true',
             'robot_type': 'xarm',
             'hw_ns': hw_ns,
             'no_gui_ctrl': 'true',

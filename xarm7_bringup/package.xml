@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>xarm7_bringup</name>
+  <version>0.0.1</version>
+  <description>Bringup package for xArm7 with MoveIt, Gazebo, RealSense, and Vacuum Gripper</description>
+  <maintainer email="azif@example.com">azif</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <!-- Build tools -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- Test dependencies -->
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>xarm_planner</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
