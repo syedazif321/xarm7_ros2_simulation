@@ -48,6 +48,8 @@ endif()
 
 ament_package()
 
+# ros2 launch xarm_moveit_config xarm7_moveit_gazebo.launch.py
+
 
 # run uisng: ros2 run xarm7_pose_saver pose_saver
 
