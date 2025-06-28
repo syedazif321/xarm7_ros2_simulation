@@ -9,7 +9,7 @@
 class PoseSaver : public rclcpp::Node {
 public:
     PoseSaver() : Node("joint_saver") {
-        this->declare_parameter<std::string>("save_path", "/home/azif/xarm_ros2_simulation/robot_data/saved_joint_poses.yaml");
+        this->declare_parameter<std::string>("save_path", "/home/azif/xarm7_ros2_simulation/robot_data/saved_joint_poses.yaml");
         this->get_parameter("save_path", file_path_);
 
         std::cout << "Enter pose name to save: ";

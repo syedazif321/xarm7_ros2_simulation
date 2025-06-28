@@ -2,6 +2,8 @@
 <sdf version="1.4">
   <world name="default">
 
+    <plugin name="attach_detach_plugin" filename="libattach_detach.so"/>
+
     <!-- Default environment -->
     <include>
       <uri>model://ground_plane</uri>
