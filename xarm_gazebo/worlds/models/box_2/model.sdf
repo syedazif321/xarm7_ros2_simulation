@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
-  <model name='box_10'>
+  <model name='box_2'>
     <link name='link'>
       <self_collide>0</self_collide>
       <inertial>
@@ -23,7 +23,7 @@
         <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
-            <uri>model://boxes/box_10/meshes/box.dae</uri>
+            <uri>model://boxes/box_2/meshes/box.dae</uri>
           </mesh>
         </geometry>
         <material>
