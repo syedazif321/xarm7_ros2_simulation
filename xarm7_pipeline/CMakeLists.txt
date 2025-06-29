@@ -13,9 +13,11 @@ find_package(xarm_msgs REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(rosidl_default_runtime REQUIRED)
 find_package(msg_gazebo REQUIRED)
+find_package(moveit_msgs REQUIRED)
+
 
 add_executable(xarm7_pipeline_node src/xarm7_pipeline_node.cpp)
-ament_target_dependencies(xarm7_pipeline_node rclcpp geometry_msgs msg_gazebo xarm_msgs yaml-cpp)
+ament_target_dependencies(xarm7_pipeline_node rclcpp geometry_msgs msg_gazebo xarm_msgs moveit_msgs yaml-cpp)
 
 install(TARGETS xarm7_pipeline_node DESTINATION lib/${PROJECT_NAME})
 # This line links yaml-cpp library properly
