@@ -7,31 +7,23 @@ namespace gazebo
 {
   class AttachDetachService : public WorldPlugin
   {
-    private: rclcpp::Node::SharedPtr node_;
-    private: rclcpp::Service<msg_gazebo::srv::AttachDetach>::SharedPtr service_;
+  private:
+    rclcpp::Node::SharedPtr node_;
+    rclcpp::Service<msg_gazebo::srv::AttachDetach>::SharedPtr service_;
+    rclcpp::executors::SingleThreadedExecutor::SharedPtr executor_;
+    std::shared_ptr<std::thread> executor_thread_;
+    physics::WorldPtr world_;
+    std::map<std::string, physics::JointPtr> joints_;
 
-    private: rclcpp::executors::SingleThreadedExecutor::SharedPtr executor_;
-    private: std::shared_ptr<std::thread> executor_thread_;
-
-    private: physics::WorldPtr world_;
-    private: std::map<std::string, physics::JointPtr> joints_;
-
-    public: void Load(physics::WorldPtr _world, sdf::ElementPtr /*_sdf*/) override
+  public:
+    void Load(physics::WorldPtr _world, sdf::ElementPtr /*_sdf*/) override
     {
       this->world_ = _world;
 
-      // Initialize ROS 2 context if it's not already initialized
+      // Initialize ROS 2 context if not already done
       if (!rclcpp::ok())
       {
         rclcpp::init(0, nullptr);
-      }
-      
-
-      // Initialize ROS 2 node
-      if (!rclcpp::ok())
-      {
-        RCLCPP_ERROR(rclcpp::get_logger("AttachDetachService"), "ROS 2 not initialized, plugin will not work.");
-        return;
       }
 
       this->node_ = rclcpp::Node::make_shared("attach_detach_service");
@@ -59,14 +51,8 @@ namespace gazebo
       });
     }
 
-    // Called every simulation step
-    // public: void OnUpdate()
-    // {
-    //   // Spin the node in a non-blocking way
-    //   this->executor_->spin_some();
-    // }
-
-    private: void HandleService(
+  private:
+    void HandleService(
       const std::shared_ptr<msg_gazebo::srv::AttachDetach::Request> request,
       std::shared_ptr<msg_gazebo::srv::AttachDetach::Response> response)
     {
@@ -97,7 +83,8 @@ namespace gazebo
         return;
       }
 
-      std::string jointName = request->model1 + "_" + request->link1 + "_to_" + request->model2 + "_" + request->link2;
+      std::string jointName = request->model1 + "_" + request->link1 + "_to_" +
+                              request->model2 + "_" + request->link2;
 
       if (request->attach)
       {
@@ -107,6 +94,22 @@ namespace gazebo
           response->message = "Links are already attached.";
           return;
         }
+
+
+        ignition::math::Vector3d pos1 = link1->WorldPose().Pos();
+        ignition::math::Vector3d pos2 = link2->WorldPose().Pos();
+        double distance = pos1.Distance(pos2);
+
+        RCLCPP_INFO(this->node_->get_logger(), "Distance between links: %.4f m", distance);
+
+        if (distance > 0.25)
+        {
+            response->success = false;
+            response->message = "Links are too far apart to attach (distance > 25cm).";
+            RCLCPP_WARN(this->node_->get_logger(), "%s", response->message.c_str());
+            return;
+        }
+
 
         auto joint = this->world_->Physics()->CreateJoint("fixed", model1);
         joint->Load(link1, link2, ignition::math::Pose3d::Zero);
