@@ -20,6 +20,13 @@ It supports:
 
 ---
 
+### 🎥 Simulation Preview
+
+[![Simulation](media/xarm7_simulation.gif)](media/xarm7_simulation.gif)
+
+---
+
+
 ## 🗂️ Packages
 
 | Package            | Description                                            |
