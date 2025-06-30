@@ -33,7 +33,7 @@ public:
         attach_detach_client_ = this->create_client<msg_gazebo::srv::AttachDetach>("/AttachDetach");
         fk_client_ = this->create_client<moveit_msgs::srv::GetPositionFK>("/compute_fk");
 
-        this->declare_parameter<std::string>("joint_file", "/home/azif/xarm7_ros2_simulation/robot_data/saved_joint_poses.yaml");
+        this->declare_parameter<std::string>("joint_file", "/home/azif/xarm_ros2_simulation/robot_data/saved_joint_poses.yaml");
 
         std::string joint_file;
         this->get_parameter("joint_file", joint_file);
