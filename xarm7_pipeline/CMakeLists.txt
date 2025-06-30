@@ -14,6 +14,7 @@ find_package(yaml-cpp REQUIRED)
 find_package(rosidl_default_runtime REQUIRED)
 find_package(msg_gazebo REQUIRED)
 find_package(moveit_msgs REQUIRED)
+find_package(msg_gazebo REQUIRED)
 
 
 add_executable(xarm7_pipeline_node src/xarm7_pipeline_node.cpp)

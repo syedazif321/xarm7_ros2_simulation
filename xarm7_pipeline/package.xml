@@ -15,7 +15,9 @@
   <depend>yaml-cpp</depend>
   <depend>moveit_msgs</depend>
 
-  
+  <build_depend>msg_gazebo</build_depend>
+  <exec_depend>msg_gazebo</exec_depend>
+
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
