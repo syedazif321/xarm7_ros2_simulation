@@ -66,6 +66,7 @@ sudo apt update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 source install/setup.bash
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/azif/xarm_ros2_simulation/xarm_gazebo/worlds/models
 ```
 
 ---
