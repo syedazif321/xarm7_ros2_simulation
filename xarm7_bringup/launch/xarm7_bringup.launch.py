@@ -1,14 +1,23 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
-from launch_ros.actions import Node
 
 def generate_launch_description():
     hw_ns = LaunchConfiguration('hw_ns', default='xarm')
 
-    # Launch only your planner (not the full moveit+gazebo config)
+    # Dynamically set GAZEBO_MODEL_PATH to include your model directory
+    gazebo_model_path = PathJoinSubstitution([
+        FindPackageShare('xarm_gazebo'), 'worlds', 'models'
+    ])
+
+    set_gazebo_model_path = SetEnvironmentVariable(
+        name='GAZEBO_MODEL_PATH',
+        value=[gazebo_model_path, ':', LaunchConfiguration('GAZEBO_MODEL_PATH')]
+    )
+
+    # Include your xarm_planner launch file
     xarm_planner_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution([
@@ -42,5 +51,6 @@ def generate_launch_description():
             default_value='xarm',
             description='Hardware namespace for the robot'
         ),
+        set_gazebo_model_path,
         xarm_planner_launch
     ])
